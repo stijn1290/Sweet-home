@@ -18,7 +18,7 @@
                                 href="{{ url('/dashboard') }}"
                                 class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
                             >
-                                Dashboard
+                                Admin
                             </a>
                         @else
                             <a
@@ -35,12 +35,16 @@
                                 </a>
                             @endif
                         @endauth
-                        @if(!\Illuminate\Support\Facades\Auth::user())
                             <a href="{{ route('dish.index') }}"
                                class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                                Dish
+                                Menu
                             </a>
-                        @endif
+{{--                            @auth--}}
+{{--                            <a href="{{ route('basket.show', \App\Models\User::where('id', \Illuminate\Support\Facades\Auth::id())->get()) }}"--}}
+{{--                               class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">--}}
+{{--                                Basket--}}
+{{--                            </a>--}}
+{{--                            @endauth--}}
                     </nav>
                 </div>
             </div>

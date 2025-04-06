@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Dish;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,8 @@ class DishController extends Controller
      */
     public function create()
     {
-        return view('dish.create');
+        $categories = Category::all();
+        return view('dish.create', ['categories' => $categories]);
     }
 
     /**
@@ -32,12 +34,15 @@ class DishController extends Controller
         $request->validate([
             'name' => 'required',
             'price' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'category_id' => 'required',
         ]);
+        $category_id = Category::where('name', $request->get('category_id'))->pluck('id')->first();
         $dish = Dish::create([
             'name' => $request->get('name'),
             'price' => $request->get('price'),
             'description' => $request->get('description'),
+            'category_id' => $category_id,
         ]);
         if ($dish) {
             return redirect()->route('dish.index')->with('success', 'Dish created successfully');
@@ -58,7 +63,8 @@ class DishController extends Controller
      */
     public function edit(Dish $dish)
     {
-        return view('dish.edit', ['dish' => $dish]);
+        $categories = Category::all();
+        return view('dish.edit', ['dish' => $dish, 'categories' => $categories]);
     }
 
     /**
@@ -69,10 +75,17 @@ class DishController extends Controller
         $request->validate([
             'name' => 'required',
             'price' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'category_id' => 'required',
         ]);
+        $category_id = Category::where('name', $request->get('category_id'))->pluck('id')->first();
         $dish = Dish::where('name', $request->get('name'))->get()->first();
-        $dish->update($request->all());
+        $dish->update([
+            'name' => $request->get('name'),
+            'price' => $request->get('price'),
+            'description' => $request->get('description'),
+            'category_id' => $category_id,
+        ]);
         return redirect()->route('dish.index');
     }
 

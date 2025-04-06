@@ -3,6 +3,7 @@
         <h2 class="">{{ $dish->name }}</h2>
         <p>{{ $dish->description }}</p>
         <p>€ {{ $dish->price }}</p>
+        <p>Categorie: {{ $dish->category->name }}</p>
         <div class="flex flex-row gap-4">
             <a href="{{ route('dish.edit', $dish) }}" class="bg-blue-600 p-2 rounded-xl text-white">Edit {{ $dish->name }}</a>
             <form method="post" action="{{ route('dish.destroy', $dish) }}">
