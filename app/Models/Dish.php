@@ -17,4 +17,12 @@ class Dish extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function baskets()
+    {
+        return $this->belongsToMany(Basket::class)->withPivot('quantity')->withTimestamps();
+    }
+    public function totalPrice()
+    {
+        return $this->pivot->quantity * $this['price'];
+    }
 }

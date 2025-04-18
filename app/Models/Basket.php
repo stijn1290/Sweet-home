@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Basket extends Model
 {
-    protected $table = 'basket';
+    protected $table = 'baskets';
     protected $fillable = [
         'dish_id',
         'user_id',
     ];
-    public function dish()
+    public function dishes()
     {
-        return $this->hasMany(Dish::class);
+        return $this->belongsToMany(Dish::class)->withPivot('quantity')->withTimestamps();
     }
     public function user()
     {

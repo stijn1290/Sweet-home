@@ -13,42 +13,51 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <nav class="-mx-3 flex flex-1 justify-end">
+                        <a href="{{ route('dish.index') }}"
+                           class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                            Menu
+                        </a>
                         @auth
-                            <a
-                                href="{{ url('/dashboard') }}"
-                                class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
-                            >
-                                Admin
-                            </a>
-                        @else
-                            <a
-                                href="{{ route('login') }}"
-                                class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                                Log in
-                            </a>
-
-                            @if (Route::has('register'))
-                                <a
-                                    href="{{ route('register') }}"
-                                    class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                                    Register
+                            @if(!\Illuminate\Support\Facades\Auth::user()->is_admin)
+                                <a href="{{ route('basket.show', \Illuminate\Support\Facades\Auth::id()) }}"
+                                   class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                                    Basket
                                 </a>
                             @endif
                         @endauth
-                            <a href="{{ route('dish.index') }}"
-                               class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                                Menu
-                            </a>
-{{--                            @auth--}}
-{{--                            <a href="{{ route('basket.show', \App\Models\User::where('id', \Illuminate\Support\Facades\Auth::id())->get()) }}"--}}
-{{--                               class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">--}}
-{{--                                Basket--}}
-{{--                            </a>--}}
-{{--                            @endauth--}}
+                        <a href="{{ route('contact.create') }}"
+                           class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                            Contact
+                        </a>
                     </nav>
                 </div>
             </div>
+            <div class="flex flex-row items-center">
+                @auth
+                    @if(\Illuminate\Support\Facades\Auth::user()->is_admin)
+                        <a
+                            href="{{ url('/dashboard') }}"
+                            class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
+                        >
+                            Admin
+                        </a>
+                    @endif
+                @else
+                    <a
+                        href="{{ route('login') }}"
+                        class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                        Log in
+                    </a>
 
+                    @if (Route::has('register'))
+                        <a
+                            href="{{ route('register') }}"
+                            class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                            Register
+                        </a>
+                    @endif
+                @endauth
+            </div>
             <!-- Settings Dropdown -->
             @if(\Illuminate\Support\Facades\Auth::user())
                 <div class="hidden sm:flex sm:items-center sm:ms-6">

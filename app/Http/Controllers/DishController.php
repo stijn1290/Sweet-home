@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Basket;
 use App\Models\Category;
 use App\Models\Dish;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DishController extends Controller
 {
@@ -13,8 +15,15 @@ class DishController extends Controller
      */
     public function index()
     {
-        $dishes = Dish::all();
-        return view('dish.index', ['dishes' => $dishes]);
+        $categories = Category::all();
+        if (Auth::check()) {
+            $basket = Basket::with('user')->where('user_id', Auth::id())->first();
+        }
+        else
+        {
+            $basket = null;
+        }
+        return view('dish.index', ['categories' => $categories, 'basket' => $basket]);
     }
 
     /**

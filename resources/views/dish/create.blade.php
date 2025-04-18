@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="post" action="{{ route('dish.store') }}" class="bg-white flex flex-col p-5 rounded-xl gap-4">
+    <form method="post" action="{{ route('dish.store') }}" class="bg-white flex flex-col p-5 rounded-xl shadow-2xl gap-4">
         @csrf
         <h2 class="font-extrabold">New dish</h2>
         <input type="text" placeholder="name" name="name" class="rounded-xl">

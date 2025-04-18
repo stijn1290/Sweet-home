@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->decimal('price', 20, 2);
-            $table->foreignId('category_id')->constrained('categories');
+            $table->foreignId('category_id')->constrained('categories')->ondelete('cascade');
             $table->timestamps();
         });
     }
